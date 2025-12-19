@@ -5,3 +5,12 @@ spring:
   application:
     name: payment-service
 
+
+  management:
+    tracing:
+      zipkin:
+        enabled: true
+        base-url: http://zipkin:9411/
+      sampler:
+        probability: 1.0
+

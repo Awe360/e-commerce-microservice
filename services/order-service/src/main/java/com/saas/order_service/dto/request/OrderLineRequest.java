@@ -5,10 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
+import java.lang.*;
 
 @Data
-@Component
 @AllArgsConstructor
 public class OrderLineRequest {
 

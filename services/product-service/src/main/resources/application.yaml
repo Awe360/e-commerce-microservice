@@ -3,3 +3,11 @@ spring:
     import: optional:configserver:http://localhost:8888
   application:
     name: product-service
+
+  management:
+    tracing:
+      zipkin:
+        enabled: true
+        base-url: http://zipkin:9411/
+      sampler:
+        probability: 1.0

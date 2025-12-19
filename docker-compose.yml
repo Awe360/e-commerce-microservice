@@ -70,7 +70,7 @@ services:
     restart: unless-stopped
   kafka:
     container_name: kafka_container
-    image: confluentinc/cp-kafka:latest
+    image: confluentinc/cp-kafka:6.2.0
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -84,6 +84,16 @@ services:
       - "9092:9092"
     depends_on:
       - zookeeper
+    networks:
+      microservices_network:
+    restart: unless-stopped
+
+
+  zipkin:
+    container_name: zipkin_container
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
     networks:
       microservices_network:
     restart: unless-stopped

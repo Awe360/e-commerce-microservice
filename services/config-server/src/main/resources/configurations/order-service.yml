@@ -28,6 +28,6 @@ server:
 
 application:
   config:
-    customer-service-url: http://localhost:8000/api/v1/customers
-    product-service-url: http://localhost:8000/api/v1/products
-    payment-service-url: http://localhost:8000/api/v1/payments
+    customer-service-url: http://localhost:8082/api/v1/customers
+    product-service-url: http://localhost:8085/api/v1/products
+    payment-service-url: http://localhost:8087/api/v1/payments

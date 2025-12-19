@@ -1,11 +1,15 @@
 package com.saas.notification_service.notificationDto.request;
 
-public record Customer(
-        String id,
-        String firstname,
-        String lastname,
-        String email
-) {
+
+import lombok.Data;
+import org.springframework.stereotype.Component;
+
+@Data
+public class Customer{
+    private String id;
+    private String firstName;
+    private String lastName;
+    private String email;
 
 }
 

@@ -3,20 +3,25 @@ spring:
     mongodb:
       username: admin
       password: admin
-      database: customerdb
+      database: notificationdb
       host: localhost
       port: 27017
       authentication-database: admin
+
   kafka:
     consumer:
       bootstrap-servers: localhost:9092
-      group-id: paymentGroup,orderGroup
+      # Remove group-id from global config — we'll set it per listener instead
       auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringSerializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonSerializer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: '*'
-        spring.json.type.mapping: orderConfirmation:com.saas.order_service.dto.clientDto.OrderConfirmation,paymentConfirmation:com.saas.payment_service.notification.PaymentNotificationRequest
+        # FIXED: Correct class name (PaymentConfirmation, not PaymentNotificationRequest)
+        spring.json.type.mapping: >
+          orderConfirmation:com.saas.notification_service.notificationDto.request.OrderConfirmation,
+          paymentConfirmation:com.saas.notification_service.notificationDto.request.PaymentConfirmation
+
   mail:
     host: localhost
     port: 1025
@@ -26,13 +31,12 @@ spring:
       mail:
         smtp:
           trust: "*"
-        auth: true
-        starttls:
-          enable: true
-        connectiontimeout: 5000
-        timeout: 3000
-        writetimeout: 5000
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
 
 server:
-  port: 8088
-
+  port: 8079

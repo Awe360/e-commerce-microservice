@@ -1,5 +1,8 @@
 package com.saas.order_service.dto.clientDto;
 
+import lombok.Data;
+
+@Data
 public class CustomerResponse {
 
     private String id;

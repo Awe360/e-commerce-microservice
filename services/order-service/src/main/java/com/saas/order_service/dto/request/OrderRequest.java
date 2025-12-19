@@ -16,9 +16,6 @@ import java.util.List;
 @Data
 public class OrderRequest {
 
-    @NotNull(message = "ID cannot be null")
-    private Integer id;
-
     @NotBlank(message = "Reference cannot be blank")
     private String reference;
 

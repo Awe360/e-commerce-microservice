@@ -14,7 +14,6 @@ public class OrderMapper {
 
     public Order toOrderEntity(OrderRequest orderRequest) {
         Order order = new Order();
-        order.setId(orderRequest.getId());
         order.setReference(orderRequest.getReference());
         order.setCustomerId(orderRequest.getCustomerId());
         order.setTotalAmount(orderRequest.getAmount());
