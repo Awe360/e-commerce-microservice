@@ -14,27 +14,27 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
-@AllArgsConstructor
 public class NotificationConsumer {
     private final NotificationRepository notificationRepository;
 
     @KafkaListener(topics = "payment-topic")
     public void consumePaymentConfirmation(PaymentConfirmation paymentConfirmation){
         System.out.println("Payment Confirmation received: " + paymentConfirmation);
-        notificationRepository.save(Notification.builder()
-                        .type(NotificationType.PAYMENT_CONFIRMATION)
-                        .notificationDate(LocalDateTime.now())
-                        .paymentConfirmation(paymentConfirmation)
-                        .build());
+        Notification newNotification =new Notification();
+        newNotification.setType(NotificationType.PAYMENT_CONFIRMATION);
+        newNotification.setNotificationDate(LocalDateTime.now());
+        newNotification.setPaymentConfirmation(paymentConfirmation);
+        notificationRepository.save(newNotification);
     }
 
     @KafkaListener(topics = "order-topic")
     public void consumeOrderConfirmation(OrderConfirmation orderConfirmation){
         System.out.println("Order Confirmation received: " + orderConfirmation);
-        notificationRepository.save(Notification.builder()
-                .type(NotificationType.ORDER_CONFIRMATION)
-                .notificationDate(LocalDateTime.now())
-                .orderConfirmation(orderConfirmation)
-                .build());
+        Notification orderNotification = new Notification();
+        orderNotification.setType(NotificationType.ORDER_CONFIRMATION);
+        orderNotification.setNotificationDate(LocalDateTime.now());
+        orderNotification.setOrderConfirmation(orderConfirmation);
+        notificationRepository.save(orderNotification);
+
     }
 }
